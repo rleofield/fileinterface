@@ -44,18 +44,48 @@ namespace rlf {
 
    int exec() {
 
-      string base = "/home/richard/wrk/snippets2/gh";
+      string base = "/home/richard/wrk/snippets2/gh/fileinterface";
       tFnFunctions test;
 
+      string s=  test.int_to_string(-3,4);
+      string s1=  test.uint_to_string(3,4);
+
       string pwd1 = test.working_folder();
-      bool b = test.create_folder( "pwd1" );
+      //bool b = test.create_folder( "pwd1" );
+
+      uint32_t count = 0;
+      std::vector<rlf_filefn::t_filename> folders;
+      std::vector<rlf_filefn::t_filename> files;
+
+      if( test.path_exists(base)){
+       count = test.get_folder_count(base);
+
+       files = test.files_in_subfolders( base, ".cpp", "*" );
+       folders = test.subfolders( base );
+
+      }
+
+      // copy to string lists
+      std::list<string> sfolders;
+      std::list<string> sfiles;
+
+      for( const rlf_filefn::t_filename & fn: folders ) {
+         string temp = fn.fullname();
+         sfolders.push_back(temp);
+      }
+      for( const rlf_filefn::t_filename & fn: files ) {
+         string temp = fn.filename();
+         sfiles.push_back(temp);
+      }
+
+
 
       t_filename f( pwd1 );
       string p = f.path();
 
       string temp = pwd1;
 
-      std::vector<rlf_filefn::t_filename> files = test.files_in_subfolders( pwd1 );
+      files = test.files_in_subfolders( pwd1 );
       std::vector<rlf_filefn::t_filename> files1 = test.files_in_folder( pwd1 );
 
 
@@ -81,8 +111,8 @@ namespace rlf {
       bool dirCreated = test.create_folders( temp );
 
       string pwd = test.working_folder();
-      b = test.change_folder( pwd + "base" );
-      b = test.change_folder( pwd + "src" );
+      bool b1 = test.change_folder( pwd + "base" );
+      bool b2 = test.change_folder( pwd + "src" );
       pwd = test.working_folder();
 
 

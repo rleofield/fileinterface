@@ -31,6 +31,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <sstream>
 #include <exception>
 #include <vector>
+#include <cstdint>
 
 
 #include "filehelper.h"
@@ -79,14 +80,23 @@ namespace rlf_hfile {
       bool isAbsolutePath( std::string const& path )const;
 
       std::string correct_slash_at_end( std::string const& path );
-      std::string basename( std::string const& file );
-      std::string extension( std::string const& file );
+      std::string basename( std::string const& file )const;
+      std::string extension( std::string const& file )const;
 
 
-      bool file_exists( string const& fn ) ;
-      bool path_exists( string const& path ) ;
+      bool file_exists( string const& fn )const ;
+      bool path_exists( string const& path )const ;
 
-      boost::uintmax_t file_size( std::string const& file ) ;
+      boost::uintmax_t file_size( std::string const& file )const ;
+
+      // int to string, fill char is ' '
+      // an other fillchar is ugly for negative values
+      string int_to_string(int val, size_t width = 3)const;
+
+      // uint to string, default fillchar is '0'
+      string uint_to_string( uint32_t val, size_t  width = 3, char fill = '0')const;
+
+     uint32_t get_folder_count(string const& path)const;
 
 
    };

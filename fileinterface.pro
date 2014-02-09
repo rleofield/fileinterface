@@ -75,3 +75,8 @@ INCLUDEPATH += $$PWD/src/ftw
 
 
 LIBS = -lboost_system -lboost_filesystem
+
+OTHER_FILES += \
+    lgpl-3.0.txt \
+    README.md \
+    Funktionen.txt
