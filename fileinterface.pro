@@ -52,7 +52,8 @@ SOURCES +=  \
     src/hfile/t_ifncontrol.cpp \
     src/hstring/stringhelper.cpp \
     src/hstring/gettokens.cpp \
-    src/hfile/filehelper.cpp
+    src/hfile/filehelper.cpp \
+    src/hfile/time.cpp
 
 
 HEADERS += \

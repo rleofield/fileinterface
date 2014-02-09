@@ -29,6 +29,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <iomanip>
 #include <iostream>
 #include <fstream>
+#include <iostream>
+#include <sstream>
+#include <chrono>
+#include <mutex>
 
 #include <boost/filesystem.hpp>
 
@@ -36,6 +40,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "stringhelper.h"
 #include "filehelper.h"
 #include "t_filename.h"
+
+
+
+
+static std::mutex mutex;
+
+#define HAS_STD_PUT_TIME 0
+
+using std::string;
+
 
 
 using namespace std;
@@ -182,26 +196,6 @@ namespace rlf_hfile_intern {
 
 
 
-   // YYYY-MM-DD_hh-mm-ss
-   string date_time() {
-      time_t osBinaryTime;  // C run-time time (defined in <time.h>)
-      time( &osBinaryTime ) ;  // Get the current time from the os
-      struct tm* today = localtime( &osBinaryTime );
-      stringstream o;
-      fill( o, 4, today->tm_year + 1900 );
-      o <<  "-";
-      fill( o, 2, today->tm_mon + 1 );
-      o <<  "-";
-      fill( o, 2, today->tm_mday );
-      o <<  "_";
-      fill( o, 2, today->tm_hour );
-      o <<  "-";
-      fill( o, 2, today->tm_min );
-      o <<  "-";
-      fill( o, 2, today->tm_sec );
-      return o.str();
-   }
-
    string working_directory() {
       string pwd = current_path();
       return pwd;
@@ -246,6 +240,11 @@ namespace rlf_hfile_intern {
 
    std::string correct_slash_at_end( std::string const& path ) {
       std::string temp = path;
+
+      if( temp.size() == 0 ) {
+         return string();
+      }
+
       // correct slash at end
       string s = local::slash();
 

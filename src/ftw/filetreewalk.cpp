@@ -186,7 +186,7 @@ for( auto s: _include_files ) {
             bool b = filter_file( p );
 
             if( b ) {
-               t_filename fn( name );
+               t_filename fn = name;
                _files.push_back( fn );
             }
          }
@@ -230,17 +230,13 @@ for( auto s: _include_files ) {
             bool b = filter_file( p );
 
             if( b ) {
-               t_filename fn( name );
+               t_filename fn = name;
                _files.push_back( fn );
             }
          }
 
-         //    if (regex_match(name, pattern))
-         //      std::cout << iter->path() << "\n";
       }
    }
-
-
 
 
 }

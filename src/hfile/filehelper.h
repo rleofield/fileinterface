@@ -32,6 +32,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using std::string;
 using boost::uintmax_t;
 
+namespace rlf_time {
+   std::string now( string format = "%H:%M:%S" ) ;
+   std::string now_ms( string format = "%H:%M:%S" ) ;
+   const string date_time_xml_format = "%Y.%M.%dT%H:%M:%S" ; // xml time format
+   const string date_time_hyphenated = "%Y-%M-%d_%H-%M-%S"; // as 2012-07-25_17-35-10
+   const string date_time_year = "%Y.%M.%d %H:%M:%S" ; // year date time
+   const string time = "%H:%M:%S";
+
+}
+
+
 namespace rlf_hfile_intern {
 
 

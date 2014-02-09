@@ -87,9 +87,10 @@ namespace rlf_hfile {
    }
 
    std::vector<rlf_filefn::t_filename> tFnFunctions::subfolders( std::string const& path, string const& include, string const& exclude ) const {
-      if( !path_exists(path) ){
+      if( !path_exists( path ) ) {
          return std::vector<rlf_filefn::t_filename>();
       }
+
       rlf_ftw::ftw f( path );
       f.include_folders( include );
       f.exclude_folders( exclude );
@@ -134,7 +135,7 @@ namespace rlf_hfile {
       return rlf_hfile_intern::getbasename( file );
    }
 
-   std::string tFnFunctions::extension( std::string const& file ) const{
+   std::string tFnFunctions::extension( std::string const& file ) const {
       return rlf_hfile_intern::getextension( file );
    }
 
@@ -152,26 +153,28 @@ namespace rlf_hfile {
    }
 
 
-   string tFnFunctions::int_to_string(int val, size_t width )const{
-      string s = rlf_hstring::toString(val,width, ' ');
+   string tFnFunctions::int_to_string( int val, size_t width )const {
+      string s = rlf_hstring::toString( val, width, ' ' );
       return s;
    }
-   string tFnFunctions::uint_to_string(uint32_t val, size_t  width, char fill  )const{
-      string s = rlf_hstring::toString(val,width,fill);
+   string tFnFunctions::uint_to_string( uint32_t val, size_t  width, char fill )const {
+      string s = rlf_hstring::toString( val, width, fill );
       return s;
    }
 
 
-   uint32_t tFnFunctions::get_folder_count(string const& path)const
-   try{
-      std::vector<rlf_filefn::t_filename> v = subfolders(path);
-      return static_cast<uint32_t>(v.size());
-   }
-   catch( rlf_ftw::bad_ftw & ex ){
+   uint32_t tFnFunctions::get_folder_count( string const& path )const
+
+   try {
+      std::vector<rlf_filefn::t_filename> v = subfolders( path );
+      return static_cast<uint32_t>( v.size() );
+   } catch( rlf_ftw::bad_ftw& ex ) {
       return 0;
    }
 
-
+   string tFnFunctions::date_time( string const& format )const {
+      return rlf_time::now( format );
+   }
 
 
 

@@ -91,13 +91,15 @@ namespace rlf_hfile {
 
       // int to string, fill char is ' '
       // an other fillchar is ugly for negative values
-      string int_to_string(int val, size_t width = 3)const;
+      string int_to_string( int val, size_t width = 3 )const;
 
       // uint to string, default fillchar is '0'
-      string uint_to_string( uint32_t val, size_t  width = 3, char fill = '0')const;
+      string uint_to_string( uint32_t val, size_t  width = 3, char fill = '0' )const;
 
-     uint32_t get_folder_count(string const& path)const;
+      uint32_t get_folder_count( string const& path )const;
 
+
+      string date_time( string const& format = rlf_time::date_time_hyphenated )const; // as 2012-07-25_17-35-10
 
    };
 

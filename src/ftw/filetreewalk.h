@@ -61,7 +61,9 @@ namespace rlf_ftw {
          _exclude_files(),
          _include_folders(),
          _exclude_folders(),
-         _path( p ) {
+         _path() {
+
+         _path = rlf_filefn::splitpath( p );
       }
       void path( std::string const& p );
       std::vector <t_filename > const& files()const;

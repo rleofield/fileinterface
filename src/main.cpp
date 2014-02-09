@@ -44,24 +44,31 @@ namespace rlf {
 
    int exec() {
 
-      string base = "/home/richard/wrk/snippets2/gh/fileinterface";
-      tFnFunctions test;
+      // base must be exist or must have an / at end
+      // if not exist, the last entry is interpreted as a filename
+      string base = "/home/richard/wrk/snippets2/gh/fileidddnterface";
 
-      string s=  test.int_to_string(-3,4);
-      string s1=  test.uint_to_string(3,4);
+
+      tFnFunctions test;
+      // correct base
+      base =  test.correct_slash_at_end( base );
+
+      string d = test.date_time();
+      cout << "time: " << d << endl;
+      string s =  test.int_to_string( -3, 4 );
+      string s1 =  test.uint_to_string( 3, 4 );
 
       string pwd1 = test.working_folder();
       //bool b = test.create_folder( "pwd1" );
 
-      uint32_t count = 0;
       std::vector<rlf_filefn::t_filename> folders;
       std::vector<rlf_filefn::t_filename> files;
-
-      if( test.path_exists(base)){
-       count = test.get_folder_count(base);
-
-       files = test.files_in_subfolders( base, ".cpp", "*" );
-       folders = test.subfolders( base );
+      size_t count = 0;
+      t_filename fn1( base );
+      if( test.path_exists( base ) ) {
+         count = test.get_folder_count( base );
+         files = test.files_in_subfolders( base, ".cpp", "*" );
+         folders = test.subfolders( base );
 
       }
 
@@ -69,18 +76,19 @@ namespace rlf {
       std::list<string> sfolders;
       std::list<string> sfiles;
 
-      for( const rlf_filefn::t_filename & fn: folders ) {
+for( const rlf_filefn::t_filename & fn: folders ) {
          string temp = fn.fullname();
-         sfolders.push_back(temp);
+         sfolders.push_back( temp );
       }
-      for( const rlf_filefn::t_filename & fn: files ) {
+
+for( const rlf_filefn::t_filename & fn: files ) {
          string temp = fn.filename();
-         sfiles.push_back(temp);
+         sfiles.push_back( temp );
       }
 
 
 
-      t_filename f( pwd1 );
+      t_filename f = pwd1;
       string p = f.path();
 
       string temp = pwd1;
@@ -91,7 +99,7 @@ namespace rlf {
 
       temp = pwd1 +  "jj2/kk/zz/";
       test.create_folders( temp );
-      t_filename fn( temp );
+      t_filename fn = rlf_filefn::splitpath( temp );
       bool r = false;
 
       if( fn.is_folder() ) {
