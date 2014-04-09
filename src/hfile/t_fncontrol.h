@@ -41,8 +41,6 @@ using std::string;
 
 namespace rlf_hfile {
 
-
-
    class NonCopyable {
       NonCopyable( const NonCopyable& );
       const NonCopyable&  operator= ( const NonCopyable& );
@@ -50,8 +48,6 @@ namespace rlf_hfile {
       NonCopyable( ) { }
       virtual ~NonCopyable( ) { }
    };
-
-
 
    class tFnFunctions: public NonCopyable {
 
@@ -68,8 +64,11 @@ namespace rlf_hfile {
       std::string working_folder()const;
       bool change_folder( std::string const& newPath )const;
 
+      // return true, if exists
       bool create_folder( std::string const& path )const;
       bool create_folders( std::string const& path )const;
+
+
       bool delete_recursive( std::string const& path )const;
 
 
@@ -98,21 +97,13 @@ namespace rlf_hfile {
 
       uint32_t get_folder_count( string const& path )const;
 
-
       string date_time( string const& format = rlf_time::date_time_hyphenated )const; // as 2012-07-25_17-35-10
 
    };
 
 
-
-} // end of namespace
-
-
-
-
-
+} // end of namespace rlf_hfile
 
 #endif
-
 //EOF
 

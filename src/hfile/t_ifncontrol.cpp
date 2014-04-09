@@ -25,7 +25,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "filehelper.h"
 #include "filetreewalk.h"
 #include "t_fncontrol.h"
-
+#include "timer.h"
 
 
 using namespace std;
@@ -173,7 +173,8 @@ namespace rlf_hfile {
    }
 
    string tFnFunctions::date_time( string const& format )const {
-      return rlf_time::now( format );
+      //return rlf_htime::tTimer().now( format );
+      return rlf_htime::tTimer::now( format );
    }
 
 

@@ -53,7 +53,8 @@ SOURCES +=  \
     src/hstring/stringhelper.cpp \
     src/hstring/gettokens.cpp \
     src/hfile/filehelper.cpp \
-    src/hfile/time.cpp
+    src/hstring/t_2D_string.cpp \
+    src/htime/timer.cpp
 
 
 HEADERS += \
@@ -66,13 +67,26 @@ HEADERS += \
     src/hstring/boost_cstdint.h \
     src/txtrw/wList.h \
     src/txtrw/rList.h \
-    src/hfile/filehelper.h
+    src/hfile/filehelper.h \
+    src/boost/boost_cstdint.h \
+    src/minit/tObjPositionSize.h \
+    src/minit/tLine.h \
+    src/minit/tIndexID.h \
+    src/minit/tArea.h \
+    src/minit/t_3D_xyz.h \
+    src/minit/t_2D_xy.h \
+    src/minit/t_2D_Matrix.h \
+    src/htime/timer.h
 
 INCLUDEPATH += $$PWD/src
+INCLUDEPATH += $$PWD/src/minit
 INCLUDEPATH += $$PWD/src/hstring
 INCLUDEPATH += $$PWD/src/hfile
 INCLUDEPATH += $$PWD/src/filefn
 INCLUDEPATH += $$PWD/src/ftw
+INCLUDEPATH += $$PWD/src/boost
+INCLUDEPATH += $$PWD/src/txtrw
+INCLUDEPATH += $$PWD/src/htime
 
 
 LIBS = -lboost_system -lboost_filesystem

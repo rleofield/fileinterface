@@ -46,7 +46,7 @@ namespace rlf {
 
       // base must be exist or must have an / at end
       // if not exist, the last entry is interpreted as a filename
-      string base = "/home/richard/wrk/snippets2/gh/fileidddnterface";
+      string base = "/home/richard/wrk/snippets2/gh/fileinterface";
 
 
       tFnFunctions test;
@@ -76,16 +76,15 @@ namespace rlf {
       std::list<string> sfolders;
       std::list<string> sfiles;
 
-for( const rlf_filefn::t_filename & fn: folders ) {
+      for( const rlf_filefn::t_filename & fn: folders ) {
          string temp = fn.fullname();
          sfolders.push_back( temp );
       }
 
-for( const rlf_filefn::t_filename & fn: files ) {
+      for( const rlf_filefn::t_filename & fn: files ) {
          string temp = fn.filename();
          sfiles.push_back( temp );
       }
-
 
 
       t_filename f = pwd1;

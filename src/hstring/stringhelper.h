@@ -94,9 +94,9 @@ namespace rlf_hstring {
       return  o.str();
    }
 
-   inline std::string toString( int val, size_t w, char fill = ' ' ) {
+   inline std::string toString( int val, size_t w = 3 ) {
       std::ostringstream o;
-      o << std::setw( w ) << std::fixed << std::setfill( fill )<< std::right  << val ;
+      o << std::setw( w ) << std::fixed << std::right << std::setfill( ' ' ) << val ;
       return  o.str();
    }
 
