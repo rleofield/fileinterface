@@ -29,12 +29,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
 #include "t_filename.h"
-#include "t_fncontrol.h"
+#include "fn_control.h"
 
 
 using namespace std;
 using rlf_filefn::t_filename;
-using rlf_hfile::tFnFunctions;
+using namespace rlf_hfile::fn_control;
 
 namespace rlf {
 
@@ -49,26 +49,28 @@ namespace rlf {
       string base = "/home/richard/wrk/snippets2/gh/fileinterface";
 
 
-      tFnFunctions test;
+
       // correct base
-      base =  test.correct_slash_at_end( base );
+      base =  correct_slash_at_end( base );
 
-      string d = test.date_time();
+      string d = date_time();
       cout << "time: " << d << endl;
-      string s =  test.int_to_string( -3, 4 );
-      string s1 =  test.uint_to_string( 3, 4 );
+      string s =  int_to_string( -3, 4 );
+      string s1 =  uint_to_string( 3, 4 );
 
-      string pwd1 = test.working_folder();
+      string pwd1 = working_folder();
       //bool b = test.create_folder( "pwd1" );
 
       std::vector<rlf_filefn::t_filename> folders;
       std::vector<rlf_filefn::t_filename> files;
       size_t count = 0;
       t_filename fn1( base );
-      if( test.path_exists( base ) ) {
-         count = test.get_folder_count( base );
-         files = test.files_in_subfolders( base, ".cpp", "*" );
-         folders = test.subfolders( base );
+      if( path_exists( base ) ) {
+         count = get_folder_count( base );
+         tInclude inc  = string(".cpp");
+         tExclude exc = string("*");
+         files = files_in_subfolders( base, inc, exc );
+         folders = subfolders( base );
 
       }
 
@@ -92,12 +94,12 @@ namespace rlf {
 
       string temp = pwd1;
 
-      files = test.files_in_subfolders( pwd1 );
-      std::vector<rlf_filefn::t_filename> files1 = test.files_in_folder( pwd1 );
+      files = files_in_subfolders( pwd1 );
+      std::vector<rlf_filefn::t_filename> files1 = files_in_folder( pwd1 );
 
 
       temp = pwd1 +  "jj2/kk/zz/";
-      test.create_folders( temp );
+      create_folders( temp );
       t_filename fn = rlf_filefn::splitpath( temp );
       bool r = false;
 
@@ -112,16 +114,15 @@ namespace rlf {
       }
 
 
-      std::vector<rlf_filefn::t_filename> subfolderlist = test.subfolders( base );
+      std::vector<rlf_filefn::t_filename> subfolderlist = subfolders( base );
       //temp = subfolderlist[0];
       temp += "neuerfoldertest/abc";
-      bool dirCreated = test.create_folders( temp );
+      bool dirCreated = create_folders( temp );
 
-      string pwd = test.working_folder();
-      bool b1 = test.change_folder( pwd + "base" );
-      bool b2 = test.change_folder( pwd + "src" );
-      pwd = test.working_folder();
-
+      string pwd = working_folder();
+      bool b1 = change_folder( pwd + "base" );
+      bool b2 = change_folder( pwd + "src" );
+      pwd = working_folder();
 
 
       return 0;

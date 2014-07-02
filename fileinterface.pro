@@ -47,20 +47,18 @@ QMAKE_CXXFLAGS_RELEASE -= -Wunused-variable
 
 SOURCES +=  \
     src/main.cpp \
-    src/ftw/filetreewalk.cpp \
     src/filefn/t_filename.cpp \
-    src/hfile/t_ifncontrol.cpp \
     src/hstring/stringhelper.cpp \
     src/hstring/gettokens.cpp \
     src/hfile/filehelper.cpp \
     src/hstring/t_2D_string.cpp \
-    src/htime/timer.cpp
+    src/htime/timer.cpp \
+    src/hfile/fn_control.cpp \
+    src/filefn/filetreewalk.cpp
 
 
 HEADERS += \
-    src/ftw/filetreewalk.h \
     src/filefn/t_filename.h \
-    src/hfile/t_fncontrol.h \
     src/hstring/stringhelper.h \
     src/hstring/gettokens.h \
     src/hstring/filehelper.h \
@@ -76,7 +74,9 @@ HEADERS += \
     src/minit/t_3D_xyz.h \
     src/minit/t_2D_xy.h \
     src/minit/t_2D_Matrix.h \
-    src/htime/timer.h
+    src/htime/timer.h \
+    src/hfile/fn_control.h \
+    src/filefn/filetreewalk.h
 
 INCLUDEPATH += $$PWD/src
 INCLUDEPATH += $$PWD/src/minit
