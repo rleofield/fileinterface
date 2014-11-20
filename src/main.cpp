@@ -30,11 +30,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "t_filename.h"
 #include "fn_control.h"
-
+#include "filetreewalk.h"
 
 using namespace std;
 using rlf_filefn::t_filename;
 using namespace rlf_hfile::fn_control;
+using rlf_ftw::ftw;
+//using rlf_ftw::ftwReturn;
+using rlf_ftw::tExcludeFolders;
+using rlf_ftw::tIncludeFiles;
 
 namespace rlf {
 
@@ -46,9 +50,9 @@ namespace rlf {
 
       // base must be exist or must have an / at end
       // if not exist, the last entry is interpreted as a filename
-      string base = "/home/richard/wrk/snippets2/gh/fileinterface";
-
-
+      string base = "/home/richard/wrk/snippets2/";
+      //
+      // C:\RAProjekte\snippets\src
 
       // correct base
       base =  correct_slash_at_end( base );
@@ -59,33 +63,40 @@ namespace rlf {
       string s1 =  uint_to_string( 3, 4 );
 
       string pwd1 = working_folder();
-      //bool b = test.create_folder( "pwd1" );
 
       std::vector<rlf_filefn::t_filename> folders;
       std::vector<rlf_filefn::t_filename> files;
-      size_t count = 0;
-      t_filename fn1( base );
-      if( path_exists( base ) ) {
-         count = get_folder_count( base );
-         tInclude inc  = string(".cpp");
-         tExclude exc = string("*");
-         files = files_in_subfolders( base, inc, exc );
-         folders = subfolders( base );
 
+      t_filename fn1( base );
+
+      rlf_ftw::ftw ftw;
+      if( path_exists( base ) ) {
+         //count = get_folder_count( base );
+         tExcludeFolders ExcludeFolders;
+         ExcludeFolders.contains = ".svn, .tmp, Debug, Release, html";
+         tIncludeFiles includeFiles;
+         includeFiles.last = ".cpp, .h";
+         ftw.path( base );
+         ftw.set_exclude_folders( ExcludeFolders );
+         ftw.set_include_files( includeFiles );
+         ftw.scan_folders();
+
+         folders = ftw.folders();
+         files = ftw.files();
       }
 
       // copy to string lists
-      std::list<string> sfolders;
-      std::list<string> sfiles;
+      std::list<string> list_folders;
+      std::list<string> list_files;
 
-      for( const rlf_filefn::t_filename & fn: folders ) {
+     for( const rlf_filefn::t_filename & fn: folders ) {
          string temp = fn.fullname();
-         sfolders.push_back( temp );
+         list_folders.push_back( temp );
       }
 
       for( const rlf_filefn::t_filename & fn: files ) {
          string temp = fn.filename();
-         sfiles.push_back( temp );
+         list_files.push_back( temp );
       }
 
 
@@ -93,9 +104,12 @@ namespace rlf {
       string p = f.path();
 
       string temp = pwd1;
+      ftw.path( pwd1 );
+      ftw.scan_folders();
 
-      files = files_in_subfolders( pwd1 );
-      std::vector<rlf_filefn::t_filename> files1 = files_in_folder( pwd1 );
+
+      files = ftw.files();
+      //std::vector<rlf_filefn::t_filename> files1 = files_in_folder( pwd1 );
 
 
       temp = pwd1 +  "jj2/kk/zz/";
@@ -113,8 +127,12 @@ namespace rlf {
          cout << temp << " ist erreichbar" << endl;
       }
 
+      ftw.path( pwd1 );
+      ftw.scan_folders();
 
-      std::vector<rlf_filefn::t_filename> subfolderlist = subfolders( base );
+
+//      ret = subfolders( base );
+      std::vector<rlf_filefn::t_filename> subfolderlist = ftw.folders();
       //temp = subfolderlist[0];
       temp += "neuerfoldertest/abc";
       bool dirCreated = create_folders( temp );

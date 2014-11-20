@@ -29,7 +29,7 @@ QMAKE_CXXFLAGS_DEBUG += -Wshadow
 QMAKE_CXXFLAGS_DEBUG += -Wextra
 QMAKE_CXXFLAGS_DEBUG += -Wunused-parameter
 QMAKE_CXXFLAGS_DEBUG -= -Wwrite-strings
-QMAKE_CXXFLAGS_DEBUG -= -Wunused-variable
+QMAKE_CXXFLAGS_DEBUG += -Wno-unused-variable
 QMAKE_CXXFLAGS_DEBUG += -Weffc++
 QMAKE_CXXFLAGS_DEBUG -= -Wignored-qualifiers
 
@@ -66,7 +66,6 @@ HEADERS += \
     src/txtrw/wList.h \
     src/txtrw/rList.h \
     src/hfile/filehelper.h \
-    src/boost/boost_cstdint.h \
     src/minit/tObjPositionSize.h \
     src/minit/tLine.h \
     src/minit/tIndexID.h \
@@ -76,7 +75,8 @@ HEADERS += \
     src/minit/t_2D_Matrix.h \
     src/htime/timer.h \
     src/hfile/fn_control.h \
-    src/filefn/filetreewalk.h
+    src/filefn/filetreewalk.h \
+    src/filefn/filetreewalk_ref.h
 
 INCLUDEPATH += $$PWD/src
 INCLUDEPATH += $$PWD/src/minit
