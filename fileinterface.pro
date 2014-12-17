@@ -30,6 +30,7 @@ QMAKE_CXXFLAGS_DEBUG += -Wextra
 QMAKE_CXXFLAGS_DEBUG += -Wunused-parameter
 QMAKE_CXXFLAGS_DEBUG -= -Wwrite-strings
 QMAKE_CXXFLAGS_DEBUG += -Wno-unused-variable
+QMAKE_CXXFLAGS_DEBUG += -Wno-unused-function
 QMAKE_CXXFLAGS_DEBUG += -Weffc++
 QMAKE_CXXFLAGS_DEBUG -= -Wignored-qualifiers
 
@@ -62,10 +63,10 @@ HEADERS += \
     src/hstring/stringhelper.h \
     src/hstring/gettokens.h \
     src/hstring/filehelper.h \
-    src/hstring/boost_cstdint.h \
     src/txtrw/wList.h \
     src/txtrw/rList.h \
     src/hfile/filehelper.h \
+    src/boost/boost_cstdint.h \
     src/minit/tObjPositionSize.h \
     src/minit/tLine.h \
     src/minit/tIndexID.h \
@@ -84,7 +85,6 @@ INCLUDEPATH += $$PWD/src/hstring
 INCLUDEPATH += $$PWD/src/hfile
 INCLUDEPATH += $$PWD/src/filefn
 INCLUDEPATH += $$PWD/src/ftw
-INCLUDEPATH += $$PWD/src/boost
 INCLUDEPATH += $$PWD/src/txtrw
 INCLUDEPATH += $$PWD/src/htime
 

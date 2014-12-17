@@ -51,6 +51,9 @@ namespace rlf {
       // base must be exist or must have an / at end
       // if not exist, the last entry is interpreted as a filename
       string base = "/home/richard/wrk/snippets2/";
+#ifdef _WIN32
+      base = "C:\\RAProjekte\\snippets\\src\\";
+#endif
       //
       // C:\RAProjekte\snippets\src
 
@@ -70,6 +73,7 @@ namespace rlf {
       t_filename fn1( base );
 
       rlf_ftw::ftw ftw;
+
       if( path_exists( base ) ) {
          //count = get_folder_count( base );
          tExcludeFolders ExcludeFolders;
@@ -89,12 +93,12 @@ namespace rlf {
       std::list<string> list_folders;
       std::list<string> list_files;
 
-     for( const rlf_filefn::t_filename & fn: folders ) {
+      for( const rlf_filefn::t_filename & fn : folders ) {
          string temp = fn.fullname();
          list_folders.push_back( temp );
       }
 
-      for( const rlf_filefn::t_filename & fn: files ) {
+      for( const rlf_filefn::t_filename & fn : files ) {
          string temp = fn.filename();
          list_files.push_back( temp );
       }
@@ -131,7 +135,7 @@ namespace rlf {
       ftw.scan_folders();
 
 
-//      ret = subfolders( base );
+      //      ret = subfolders( base );
       std::vector<rlf_filefn::t_filename> subfolderlist = ftw.folders();
       //temp = subfolderlist[0];
       temp += "neuerfoldertest/abc";
